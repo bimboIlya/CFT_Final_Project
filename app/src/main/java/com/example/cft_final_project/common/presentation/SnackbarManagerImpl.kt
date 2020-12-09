@@ -1,21 +1,41 @@
 package com.example.cft_final_project.common.presentation
 
 import android.view.View
-import com.example.cft_final_project.common.error_parser.ParsedError
+import androidx.annotation.StringRes
+import androidx.lifecycle.LifecycleObserver
+import com.example.cft_final_project.common.exceptions.error_parser.ParsedError
+import com.example.cft_final_project.common.util.delegates.SnackbarManagerDelegate
+import com.google.android.material.snackbar.Snackbar
 
-class SnackbarManagerImpl private constructor(
+/**
+ * Хранит ссылку на View
+ * Чтобы она не утекла, нужно обнулять в onDestroyView()
+ * см. [SnackbarManagerDelegate]
+ */
+class SnackbarManagerImpl(
+    private val view: View,
+    private val anchorId: Int?
+) : SnackbarManager, LifecycleObserver {
 
-) : SnackbarManager {
+    private val snackbar: Snackbar by lazy {
+        Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+    }
 
-    override fun showError(e: ParsedError) {  }
-
-    override fun showMessage(stringId: Int) {  }
-
-    override fun showMessage(message: String) {  }
-
-    companion object {
-        fun View.createSnackBarManager(): SnackbarManager {
-            return SnackbarManagerImpl()
+    init {
+        anchorId?.let {
+            snackbar.setAnchorView(anchorId)
         }
+    }
+
+    override fun showError(error: ParsedError) {
+        snackbar.setText(error.errorMessageId).show()
+    }
+
+    override fun showMessage(@StringRes stringId: Int) {
+        snackbar.setText(stringId).show()
+    }
+
+    override fun showMessage(message: String) {
+        snackbar.setText(message).show()
     }
 }

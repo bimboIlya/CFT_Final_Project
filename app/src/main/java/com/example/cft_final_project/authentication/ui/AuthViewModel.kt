@@ -3,12 +3,13 @@ package com.example.cft_final_project.authentication.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.authentication.data.UserRepository
-import com.example.cft_final_project.common.util.Event
-import com.example.cft_final_project.common.error_parser.ErrorParser
-import com.example.cft_final_project.common.network.Result.*
+import com.example.cft_final_project.common.AuthManager
+import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
+import com.example.cft_final_project.common.network.Result.Error
+import com.example.cft_final_project.common.network.Result.Success
 import com.example.cft_final_project.common.presentation.BaseViewModel
+import com.example.cft_final_project.common.util.Event
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
@@ -24,8 +25,6 @@ class AuthViewModel(
         viewModelScope.launch {
             loadingStarted()
 
-            // todo check login/pass
-
             when (val result = userRepo.register(name, password)) {
                 is Success -> attemptLogin(name, password)
                 is Error -> {
@@ -39,8 +38,6 @@ class AuthViewModel(
     fun attemptLogin(name: String, password: String) {
         viewModelScope.launch {
             loadingStarted()
-
-            // todo check login/pass
 
             when (val result = userRepo.login(name, password)) {
                 is Success -> {

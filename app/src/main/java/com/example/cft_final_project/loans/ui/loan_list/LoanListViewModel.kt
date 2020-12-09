@@ -3,7 +3,7 @@ package com.example.cft_final_project.loans.ui.loan_list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cft_final_project.common.error_parser.ErrorParser
+import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
@@ -23,9 +23,6 @@ class LoanListViewModel(
 
     private val _toLoanDetailsEvent = MutableLiveData<Event<LoanUi>>()
     val toLoanDetailEvent: LiveData<Event<LoanUi>> get() = _toLoanDetailsEvent
-
-    private val _toNewLoanEvent = MutableLiveData<Event<Unit>>()
-    val toNewLoanEvent: LiveData<Event<Unit>> get() = _toNewLoanEvent
 
     init {
         loadLoanList()
@@ -53,10 +50,6 @@ class LoanListViewModel(
 
     fun navigateToLoanDetails(loan: LoanUi) {
         _toLoanDetailsEvent.value = Event(loan)
-    }
-
-    fun navigateToNewLoan() {
-        _toNewLoanEvent.value = Event(Unit)
     }
 
     fun retry() {

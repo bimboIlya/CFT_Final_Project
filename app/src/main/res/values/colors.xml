@@ -9,9 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="orange">#F57C00</color>
+    <color name="light_orange">#FFAD42</color>
+
     <color name="background">#FFFFFF</color>
 
+    <color name="error">#E21939</color>
     <color name="approved">#10C057</color>
     <color name="registered">#90A4AE</color>
-    <color name="rejected">#E21939</color>
 </resources>

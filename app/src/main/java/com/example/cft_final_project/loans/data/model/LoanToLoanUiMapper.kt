@@ -1,7 +1,8 @@
 package com.example.cft_final_project.loans.data.model
 
 import com.example.cft_final_project.common.util.Mapper
-import com.example.cft_final_project.common.util.MissingBaseDataException
+import java.text.SimpleDateFormat
+import java.util.*
 
 object LoanToLoanUiMapper : Mapper<Loan, LoanUi> {
     override fun map(input: Loan): LoanUi {
@@ -9,14 +10,22 @@ object LoanToLoanUiMapper : Mapper<Loan, LoanUi> {
             return LoanUi(
                 id = id,
                 amount = amount,
-                date = date,
+                date = date.changeDateFormat(),
                 firstName = firstName,
                 lastName = lastName,
                 percent = percent,
                 period = period,
                 phoneNumber = phoneNumber,
-                state = LoanState.valueOf(state)
+                status = LoanStatus.valueOf(state)
             )
         }
+    }
+
+    // 2020-12-06T12:54:09.225+00:00 -> 06.12.2020
+    private fun String.changeDateFormat(): String {
+        val inputDateFormat =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
+        val date = inputDateFormat.parse(this)
+        return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date)
     }
 }

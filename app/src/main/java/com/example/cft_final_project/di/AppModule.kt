@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.common.AuthManagerImpl
-import com.example.cft_final_project.common.error_parser.ErrorParser
-import com.example.cft_final_project.common.error_parser.ErrorParserImpl
+import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
+import com.example.cft_final_project.common.exceptions.error_parser.ErrorParserImpl
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 

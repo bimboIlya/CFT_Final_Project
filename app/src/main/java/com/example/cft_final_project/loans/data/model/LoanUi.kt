@@ -13,18 +13,18 @@ data class LoanUi(
     val date: String,
     val firstName: String,
     val lastName: String,
-    val percent: Double?,
+    val percent: Double,
     val period: Int,
     val phoneNumber: String,
-    val state: LoanState
+    val status: LoanStatus
 ) : Parcelable
 
 
-enum class LoanState(
-    @StringRes textId: Int,
-    @ColorRes colorId: Int
+enum class LoanStatus(
+    @StringRes val textId: Int,
+    @ColorRes val colorId: Int
 ) {
     APPROVED(R.string.loan_approved, R.color.approved),
     REGISTERED(R.string.loan_registered, R.color.registered),
-    REJECTED(R.string.loan_rejected, R.color.rejected),
+    REJECTED(R.string.loan_rejected, R.color.error),
 }

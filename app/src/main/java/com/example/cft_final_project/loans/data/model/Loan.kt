@@ -1,7 +1,11 @@
 package com.example.cft_final_project.loans.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Loan(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val amount: Int,
     val date: String,
     val firstName: String,

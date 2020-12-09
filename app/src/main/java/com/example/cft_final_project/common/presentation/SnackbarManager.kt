@@ -1,10 +1,10 @@
 package com.example.cft_final_project.common.presentation
 
 import androidx.annotation.StringRes
-import com.example.cft_final_project.common.error_parser.ParsedError
+import com.example.cft_final_project.common.exceptions.error_parser.ParsedError
 
 interface SnackbarManager {
-    fun showError(e: ParsedError)
+    fun showError(error: ParsedError)
 
     fun showMessage(@StringRes stringId: Int)
 

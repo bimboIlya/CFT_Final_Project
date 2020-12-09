@@ -11,23 +11,25 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.cft_final_project.R
 import com.example.cft_final_project.common.AuthManager
+import com.example.cft_final_project.common.presentation.SnackbarManager
 import com.example.cft_final_project.common.util.EventObserver
+import com.example.cft_final_project.common.util.delegates.autoCleared
+import com.example.cft_final_project.common.util.delegates.snackbarManager
 import com.example.cft_final_project.databinding.FragmentLoanListBinding
 import com.example.cft_final_project.loans.data.model.LoanUi
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
 
-    private var _binding: FragmentLoanListBinding? = null
-    private val binding: FragmentLoanListBinding get() = _binding!!
-
     private val loanViewModel: LoanListViewModel by viewModel()
+
     private val authManager: AuthManager by inject()
 
-    private lateinit var adapter: LoanAdapter
+    private var binding: FragmentLoanListBinding by autoCleared()
+    private var adapter: LoanAdapter by autoCleared()
+    private var snackbarManager: SnackbarManager by snackbarManager(R.id.fab)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,23 +37,37 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        _binding = FragmentLoanListBinding.bind(view).apply {
+        binding = FragmentLoanListBinding.bind(view).apply {
             loanList.adapter = LoanAdapter(loanViewModel).also { adapter = it }
-            lifecycleOwner = viewLifecycleOwner
+
+            fab.setOnClickListener {
+                navigateToNewLoanFragment()
+            }
         }
 
         observeUi()
-        observeNavigation()
+        observeNavEvents()
+        observeErrorEvents()
     }
 
     private fun observeUi() {
-        loanViewModel.loanListLiveData.observe(viewLifecycleOwner, {
-            binding.emptyStub.isVisible = it.isEmpty()
-            adapter.submitList(it)
+        loanViewModel.loanListLiveData.observe(viewLifecycleOwner, { loanList ->
+            binding.emptyStub.isVisible = loanList.isEmpty()
+            adapter.submitList(loanList)
+        })
+
+        loanViewModel.isLoadingLiveData.observe(viewLifecycleOwner, { isLoading ->
+            binding.progressBar.isVisible = isLoading
         })
     }
 
-    private fun observeNavigation() {
+    private fun observeErrorEvents() {
+        loanViewModel.errorEvent.observe(viewLifecycleOwner, EventObserver {
+            snackbarManager.showError(it)
+        })
+    }
+
+    private fun observeNavEvents() {
         loanViewModel.toLoanDetailEvent.observe(viewLifecycleOwner, EventObserver {
             navigateToOrderDetails(it)
         })
@@ -62,8 +78,8 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
         findNavController().navigate(R.id.action_loanListFragment_to_loanDetailsFragment, args)
     }
 
-    private fun navigateToNewLoan() {
-//        findNavController().navigate() // todo
+    private fun navigateToNewLoanFragment() {
+        findNavController().navigate(R.id.action_loanListFragment_to_newLoanFragment)
     }
 
     private fun navigateToGuestFragment() {
@@ -83,11 +99,6 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
             }
             else -> return super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
 

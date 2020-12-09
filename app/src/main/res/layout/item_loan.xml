@@ -1,31 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <variable
-            name="loan"
-            type="com.example.cft_final_project.loans.data.model.LoanUi" />
-
-        <variable
-            name="viewModel"
-            type="com.example.cft_final_project.loans.ui.loan_list.LoanListViewModel" />
-    </data>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="4dp"
+    android:background="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.navigateToLoanDetails(loan)}"
-        android:paddingVertical="8dp">
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/loan_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{loan.firstName}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            tools:text="Отказано" />
+
+        <TextView
+            android:id="@+id/loan_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintEnd_toEndOf="@id/loan_status"
+            app:layout_constraintTop_toBottomOf="@id/loan_status"
+            tools:text="№ 555" />
+
+
+        <TextView
+            android:id="@+id/loan_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20.10.20" />
+
+
+        <TextView
+            android:id="@+id/debtor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loan_date"
+            tools:text="Иван Иванович" />
+
+        <TextView
+            android:id="@+id/debtor_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="@id/debtor_name"
+            app:layout_constraintTop_toBottomOf="@id/debtor_name"
+            tools:text="88005553535" />
+
+        <TextView
+            android:id="@+id/loan_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="@id/debtor_name"
+            app:layout_constraintTop_toBottomOf="@id/debtor_phone_number"
+            tools:text="25000 ₽" />
+
+        <TextView
+            android:id="@+id/loan_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="@id/debtor_name"
+            app:layout_constraintTop_toBottomOf="@id/loan_amount"
+            tools:text="12.34%" />
+
+        <TextView
+            android:id="@+id/loan_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/debtor_name"
+            app:layout_constraintTop_toBottomOf="@id/loan_percent"
+            tools:text="7 дней" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</com.google.android.material.card.MaterialCardView>

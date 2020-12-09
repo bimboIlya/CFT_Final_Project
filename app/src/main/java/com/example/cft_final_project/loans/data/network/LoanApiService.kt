@@ -1,7 +1,7 @@
 package com.example.cft_final_project.loans.data.network
 
-import com.example.cft_final_project.loans.data.model.LoanConditionsApiModel
 import com.example.cft_final_project.loans.data.model.LoanApiModel
+import com.example.cft_final_project.loans.data.model.LoanConditionsApiModel
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -22,6 +22,6 @@ interface LoanApiService {
     @GET("loans/all")
     suspend fun getAllLoans(): List<LoanApiModel>
 
-    @GET("loans/condition")
+    @GET("loans/conditions")
     suspend fun getLoanConditions(): LoanConditionsApiModel
 }

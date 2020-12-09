@@ -8,6 +8,7 @@
     <string name="exception_unknown">Неизвестная ошибка</string>
     <string name="exception_timeout">Истекло время соединения</string>
     <string name="exception_not_found">Не найдено</string>
+    <string name="exception_no_connection">Нет соединения с интернетом</string>
 
     <string name="loan_approved">Одобрено</string>
     <string name="loan_registered">Зарегистрировано</string>
@@ -16,19 +17,60 @@
     <string name="dest_sign_in">Вход</string>
     <string name="dest_sign_up">Регистрация</string>
     <string name="dest_guest">Авторизация</string>
-    <string name="dest_loan_list">Список займов</string>
+    <string name="dest_loan_list">История займов</string>
     <string name="dest_loan_details">Займ</string>
+    <string name="dest_new_loan">Новый займ</string>
+    <string name="dest_new_loan_result">Результат</string>
 
-    <string name="app_name">CFT_Final_Project</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="amount">Сумма</string>
+    <string name="period">Срок</string>
+    <string name="percent">Процент</string>
+    <string name="apply_for_loan">Оформить займ</string>
+    <string name="amount_is_zero">Сумма не должна быть равна нулю!</string>
+    <string name="max_amount">Максимальная сумма займа - %1d ₽</string>
+    <string name="amount_is_greater_than_max">Сумма превышает %1d ₽!</string>
+
+    <string name="back_to_main">Вернуться на главную</string>
+    <string name="result_registered">Займ в количестве %1d ₽ под %.2f процентов, на срок %1d дней зарегистрирован</string>
+    <string name="receiver">Получатель: %1s %1s</string>
+    <string name="debtor_phone_number">Телефон: %1s</string>
+    <string name="debtor_phone_number_short">Тел: %1s</string>
+
+    <string name="debtor_name">%1s %1s</string>
+    <string name="loan_id">№ %1d</string>
+    <string name="loan_amount">Сумма: %1d ₽</string>
+    <string name="loan_percent">Процент: %.2f%%</string>
+    <string name="loan_period">Срок: %1d дней</string>
+    <string name="instruction_approved">
+        "Займ одобрен!
+        Получить его можно по адресу д. Пушкина"
+    </string>
+    <string name="instruction_registered">
+        "Займ зарегистрирован
+        Через некоторое время мы примем по нему решение"
+    </string>
+    <string name="instruction_rejected">
+        "В займе отказано
+        У Вас дрянная кредитная история"
+    </string>
+
+    <string name="app_name">Микрозаймы</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="sign_in">Войти</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="log_out">Выйти</string>
-    <string name="no_loans">У вас нет займов</string>
+    <string name="no_loans">
+        "У вас нет займов
+        Чтобы оформить новый займ - нажмите кнопку в правом нижнем углу"
+    </string>
     <string name="empty_fields">Поля не должны быть пустыми!</string>
     <string name="loan">Займ №%1d</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_loan">Новый займ</string>
+    <string name="wrong_login_or_password">Неверный логин или пароль</string>
+
 
 </resources>

@@ -3,9 +3,9 @@ package com.example.cft_final_project.common.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
+import com.example.cft_final_project.common.exceptions.error_parser.ParsedError
 import com.example.cft_final_project.common.util.Event
-import com.example.cft_final_project.common.error_parser.ErrorParser
-import com.example.cft_final_project.common.error_parser.ParsedError
 
 abstract class BaseViewModel(
     private val errorParser: ErrorParser
