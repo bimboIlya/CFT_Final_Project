@@ -13,7 +13,7 @@ interface LoanDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(loanList: List<Loan>)
 
-    @Query("SELECT * FROM loan")
+    @Query("SELECT * FROM loan ORDER BY id DESC")
     suspend fun getAllLoans(): List<Loan>
 
     @Query("SELECT * FROM loan")

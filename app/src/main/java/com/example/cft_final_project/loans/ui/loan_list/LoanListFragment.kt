@@ -45,9 +45,16 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
             }
         }
 
+        setUpPullToRefresh()
+
         observeUi()
         observeNavEvents()
         observeErrorEvents()
+    }
+
+    private fun setUpPullToRefresh() = with(binding.pullToRefresh) {
+        setOnRefreshListener { loanViewModel.retry() }
+        setColorSchemeResources(R.color.orange)
     }
 
     private fun observeUi() {
@@ -57,7 +64,7 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
         })
 
         loanViewModel.isLoadingLiveData.observe(viewLifecycleOwner, { isLoading ->
-            binding.progressBar.isVisible = isLoading
+            binding.pullToRefresh.isRefreshing = isLoading
         })
     }
 
@@ -94,6 +101,7 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
         return when (item.itemId) {
             R.id.action_log_out -> {
                 authManager.invalidateToken()
+                loanViewModel.clearCachedLoans()
                 navigateToGuestFragment()
                 true
             }

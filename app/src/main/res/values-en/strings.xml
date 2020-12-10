@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Ошибки -->
-    <string name="exception_user_exists">Пользователь с таким именем уже существует</string>
+    <string name="exception_user_exists">ENGLISH Пользователь с таким именем уже существует</string>
     <string name="exception_unauthorized">Неавторизован</string>
     <string name="exception_forbidden">Нет доступа</string>
     <string name="exception_server">Ошибка сервера</string>

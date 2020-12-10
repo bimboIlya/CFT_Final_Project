@@ -3,6 +3,7 @@ package com.example.cft_final_project.di
 import com.example.cft_final_project.common.network.NetworkService
 import com.example.cft_final_project.loans.data.LoanRepository
 import com.example.cft_final_project.loans.data.LoanRepositoryImpl
+import com.example.cft_final_project.loans.data.db.AppDatabase
 import com.example.cft_final_project.loans.data.network.LoanApiService
 import com.example.cft_final_project.loans.ui.loan_details.LoanDetailsViewModel
 import com.example.cft_final_project.loans.ui.loan_list.LoanListViewModel
@@ -14,7 +15,8 @@ import org.koin.dsl.module
 
 val loanModule = module {
     single { provideLoanApiService(get(named(TOKEN_NETWORK_SERVICE))) }
-    single<LoanRepository> { LoanRepositoryImpl(get(), get()) }
+    single { provideLoanDao(get()) }
+    single<LoanRepository> { LoanRepositoryImpl(get(), get(), get()) }
     viewModel { LoanListViewModel(get(), get()) }
     viewModel { LoanDetailsViewModel(get()) }
     viewModel { NewLoanViewModel(get(), get()) }
@@ -24,3 +26,5 @@ val loanModule = module {
 private fun provideLoanApiService(networkService: NetworkService): LoanApiService {
     return networkService.create(LoanApiService::class.java)
 }
+
+private fun provideLoanDao(db: AppDatabase) = db.loanDao()

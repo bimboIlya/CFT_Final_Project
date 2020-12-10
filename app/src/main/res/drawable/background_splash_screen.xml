@@ -3,6 +3,6 @@
     <item android:drawable="@color/background"/>
     <item>
         <bitmap android:gravity="center"
-            android:src="@drawable/moon2b"/>
+            android:src="@drawable/icon_logo"/>
     </item>
 </layer-list>

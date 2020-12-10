@@ -2,6 +2,7 @@ package com.example.cft_final_project.loans.data
 
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.util.mapListOrEmpty
+import com.example.cft_final_project.loans.data.db.LoanDao
 import com.example.cft_final_project.loans.data.model.ConditionsApiToConditionsMapper
 import com.example.cft_final_project.loans.data.model.Loan
 import com.example.cft_final_project.loans.data.model.LoanApiToLoanMapper
@@ -13,6 +14,7 @@ import kotlinx.coroutines.withContext
 
 class LoanRepositoryImpl(
     private val loanApiService: LoanApiService,
+    private val loanDao: LoanDao,
     private val dispatcherIO: CoroutineDispatcher
 ) : LoanRepository {
 
@@ -42,11 +44,17 @@ class LoanRepositoryImpl(
     override suspend fun getAllLoans(): Result<List<Loan>> = withContext(dispatcherIO) {
         return@withContext try {
             val loanApiList = loanApiService.getAllLoans()
-            val loan = LoanApiToLoanMapper.mapListOrEmpty(loanApiList)
+            val loanList = LoanApiToLoanMapper.mapListOrEmpty(loanApiList)
 
-            Result.Success(loan)
+            loanDao.insertAll(loanList)
+
+            Result.Success(loanList)
         } catch (ex: Throwable) {
-            Result.Error(ex)
+            val cachedLoanList = loanDao.getAllLoans()
+            when (cachedLoanList.isEmpty()) {
+                true -> { Result.Error(ex) }
+                false -> { Result.Success(cachedLoanList) }
+            }
         }
     }
 
@@ -59,5 +67,9 @@ class LoanRepositoryImpl(
         } catch (ex: Throwable) {
             Result.Error(ex)
         }
+    }
+
+    override suspend fun clearCachedLoans() = withContext(dispatcherIO) {
+        loanDao.dropTable()
     }
 }

@@ -55,4 +55,10 @@ class LoanListViewModel(
     fun retry() {
         loadLoanList()
     }
+
+    fun clearCachedLoans() {
+        viewModelScope.launch {
+            loanRepo.clearCachedLoans()
+        }
+    }
 }

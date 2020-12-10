@@ -14,4 +14,6 @@ interface LoanRepository {
     suspend fun getAllLoans(): Result<List<Loan>>
 
     suspend fun getLoanConditions(): Result<LoanConditions>
+
+    suspend fun clearCachedLoans()
 }

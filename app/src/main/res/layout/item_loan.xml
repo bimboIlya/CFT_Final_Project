@@ -7,8 +7,8 @@
     android:layout_marginHorizontal="6dp"
     android:layout_marginVertical="4dp"
     android:background="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,7 +34,6 @@
             app:layout_constraintTop_toBottomOf="@id/loan_status"
             tools:text="№ 555" />
 
-
         <TextView
             android:id="@+id/loan_date"
             android:layout_width="wrap_content"
@@ -45,7 +44,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="20.10.20" />
-
 
         <TextView
             android:id="@+id/debtor_name"
@@ -96,7 +94,6 @@
             app:layout_constraintStart_toStartOf="@id/debtor_name"
             app:layout_constraintTop_toBottomOf="@id/loan_percent"
             tools:text="7 дней" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
