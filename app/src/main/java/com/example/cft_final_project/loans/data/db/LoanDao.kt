@@ -1,6 +1,5 @@
 package com.example.cft_final_project.loans.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,9 +14,6 @@ interface LoanDao {
 
     @Query("SELECT * FROM loan ORDER BY id DESC")
     suspend fun getAllLoans(): List<Loan>
-
-    @Query("SELECT * FROM loan")
-    fun observeAllLoans(): LiveData<List<Loan>>
 
     @Query("SELECT * FROM loan WHERE id = :id")
     suspend fun getLoanById(id: Int): Loan

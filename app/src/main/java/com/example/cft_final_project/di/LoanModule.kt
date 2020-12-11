@@ -1,9 +1,8 @@
 package com.example.cft_final_project.di
 
 import com.example.cft_final_project.common.network.NetworkService
-import com.example.cft_final_project.loans.data.LoanRepository
-import com.example.cft_final_project.loans.data.LoanRepositoryImpl
 import com.example.cft_final_project.loans.data.db.AppDatabase
+import com.example.cft_final_project.loans.data.domain.*
 import com.example.cft_final_project.loans.data.network.LoanApiService
 import com.example.cft_final_project.loans.ui.loan_details.LoanDetailsViewModel
 import com.example.cft_final_project.loans.ui.loan_list.LoanListViewModel
@@ -17,9 +16,15 @@ val loanModule = module {
     single { provideLoanApiService(get(named(TOKEN_NETWORK_SERVICE))) }
     single { provideLoanDao(get()) }
     single<LoanRepository> { LoanRepositoryImpl(get(), get(), get()) }
-    viewModel { LoanListViewModel(get(), get()) }
+
+    factory { ClearCachedLoansUseCase(get()) }
+    factory { CreateLoanUseCase(get()) }
+    factory { GetAllLoansUseCase(get()) }
+    factory { GetLoanConditionsUseCase(get()) }
+
+    viewModel { LoanListViewModel(get(), get(), get()) }
     viewModel { LoanDetailsViewModel(get()) }
-    viewModel { NewLoanViewModel(get(), get()) }
+    viewModel { NewLoanViewModel(get(), get(), get()) }
     viewModel { NewLoanResultViewModel(get()) }
 }
 

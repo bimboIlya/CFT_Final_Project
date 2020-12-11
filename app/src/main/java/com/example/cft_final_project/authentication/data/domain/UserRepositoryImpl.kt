@@ -1,4 +1,4 @@
-package com.example.cft_final_project.authentication.data
+package com.example.cft_final_project.authentication.data.domain
 
 import com.example.cft_final_project.authentication.data.model.User
 import com.example.cft_final_project.authentication.data.model.UserApiToUserMapper
@@ -14,10 +14,9 @@ class UserRepositoryImpl(
     private val dispatcherIO: CoroutineDispatcher
 ) : UserRepository {
 
-    override suspend fun register(name: String, password: String): Result<User> =
+    override suspend fun register(credentials: AuthParams): Result<User> =
         withContext(dispatcherIO) {
             return@withContext try {
-                val credentials = AuthParams(name, password)
 
                 val userApi = authApiService.registration(credentials)
                 val user = UserApiToUserMapper.map(userApi)
@@ -28,10 +27,9 @@ class UserRepositoryImpl(
             }
         }
 
-    override suspend fun login(name: String, password: String): Result<String> =
+    override suspend fun login(credentials: AuthParams): Result<String> =
         withContext(dispatcherIO) {
             return@withContext try {
-                val credentials = AuthParams(name, password)
 
                 val tokenApi = authApiService.login(credentials)?.string()
                 val token: String = tokenApi ?: throw MissingBaseDataFromApiException()

@@ -1,4 +1,4 @@
-package com.example.cft_final_project.loans.data
+package com.example.cft_final_project.loans.data.domain
 
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.util.mapListOrEmpty
@@ -51,9 +51,10 @@ class LoanRepositoryImpl(
             Result.Success(loanList)
         } catch (ex: Throwable) {
             val cachedLoanList = loanDao.getAllLoans()
+
             when (cachedLoanList.isEmpty()) {
-                true -> { Result.Error(ex) }
-                false -> { Result.Success(cachedLoanList) }
+                false -> Result.Success(cachedLoanList)
+                true -> Result.Error(ex)
             }
         }
     }
@@ -71,5 +72,6 @@ class LoanRepositoryImpl(
 
     override suspend fun clearCachedLoans() = withContext(dispatcherIO) {
         loanDao.dropTable()
+        Result.Success(Unit)
     }
 }

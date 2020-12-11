@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cft_final_project.R
+import com.example.cft_final_project.authentication.data.network.AuthParams
 import com.example.cft_final_project.common.presentation.SnackbarManager
 import com.example.cft_final_project.common.util.EventObserver
 import com.example.cft_final_project.common.util.delegates.autoCleared
@@ -37,7 +38,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
                 if (name.isNotBlank() && password.isNotBlank()) {
                     requireView().hideKeyboard()
-                    authViewModel.attemptRegistration(name, password)
+                    val credentials = AuthParams(name, password)
+                    authViewModel.attemptRegistration(credentials)
                 } else {
                     snackbarManager.showMessage(R.string.empty_fields)
                 }

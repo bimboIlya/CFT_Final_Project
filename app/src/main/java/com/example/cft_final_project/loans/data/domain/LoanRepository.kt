@@ -1,4 +1,4 @@
-package com.example.cft_final_project.loans.data
+package com.example.cft_final_project.loans.data.domain
 
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.loans.data.model.Loan
@@ -15,5 +15,5 @@ interface LoanRepository {
 
     suspend fun getLoanConditions(): Result<LoanConditions>
 
-    suspend fun clearCachedLoans()
+    suspend fun clearCachedLoans(): Result<Unit>
 }

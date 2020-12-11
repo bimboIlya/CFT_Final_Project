@@ -8,13 +8,15 @@ import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
 import com.example.cft_final_project.common.util.mapListOrEmpty
-import com.example.cft_final_project.loans.data.LoanRepository
+import com.example.cft_final_project.loans.data.domain.ClearCachedLoansUseCase
+import com.example.cft_final_project.loans.data.domain.GetAllLoansUseCase
 import com.example.cft_final_project.loans.data.model.LoanToLoanUiMapper
 import com.example.cft_final_project.loans.data.model.LoanUi
 import kotlinx.coroutines.launch
 
 class LoanListViewModel(
-    private val loanRepo: LoanRepository,
+    private val getAllLoansUseCase: GetAllLoansUseCase,
+    private val clearCachedLoansUseCase: ClearCachedLoansUseCase,
     errorParser: ErrorParser
 ) : BaseViewModel(errorParser) {
 
@@ -29,11 +31,10 @@ class LoanListViewModel(
     }
 
     private fun loadLoanList() {
-        loadingStarted()
-
         viewModelScope.launch {
+            loadingStarted()
 
-            when (val result = loanRepo.getAllLoans()) {
+            when (val result = getAllLoansUseCase(Unit)) {
                 is Result.Success -> {
                     _loanListLiveData.value =
                         LoanToLoanUiMapper.mapListOrEmpty(result.data)
@@ -48,17 +49,17 @@ class LoanListViewModel(
         }
     }
 
+    fun clearCachedLoans() {
+        viewModelScope.launch {
+            clearCachedLoansUseCase(Unit)
+        }
+    }
+
     fun navigateToLoanDetails(loan: LoanUi) {
         _toLoanDetailsEvent.value = Event(loan)
     }
 
     fun retry() {
         loadLoanList()
-    }
-
-    fun clearCachedLoans() {
-        viewModelScope.launch {
-            loanRepo.clearCachedLoans()
-        }
     }
 }
