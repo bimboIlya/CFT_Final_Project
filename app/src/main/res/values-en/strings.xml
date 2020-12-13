@@ -1,65 +1,67 @@
 <resources>
 
     <!-- Ошибки -->
-    <string name="exception_user_exists">ENGLISH Пользователь с таким именем уже существует</string>
-    <string name="exception_unauthorized">Неавторизован</string>
-    <string name="exception_forbidden">Нет доступа</string>
-    <string name="exception_server">Ошибка сервера</string>
-    <string name="exception_unknown">Неизвестная ошибка</string>
-    <string name="exception_timeout">Истекло время соединения</string>
-    <string name="exception_not_found">Не найдено</string>
-    <string name="exception_no_connection">Нет соединения с интернетом</string>
+    <string name="exception_user_exists">User with same name already exists!</string>
+    <string name="exception_unauthorized">Unauthorized</string>
+    <string name="exception_forbidden">Forbidden</string>
+    <string name="exception_server">Server error</string>
+    <string name="exception_unknown">Unknown error</string>
+    <string name="exception_timeout">Connection timeout</string>
+    <string name="exception_not_found">Not found</string>
+    <string name="exception_no_connection">No Internet connection</string>
+    <string name="wrong_login_or_password">Incorrect login or password</string>
 
-    <string name="loan_approved">Одобрено</string>
-    <string name="loan_registered">Зарегистрировано</string>
-    <string name="loan_rejected">Отказано</string>
+    <string name="loan_approved">Approved</string>
+    <string name="loan_registered">Registered</string>
+    <string name="loan_rejected">Rejected</string>
 
-    <string name="dest_sign_in">Вход</string>
-    <string name="dest_sign_up">Регистрация</string>
-    <string name="dest_guest">Авторизация</string>
-    <string name="dest_loan_list">История займов</string>
-    <string name="dest_loan_details">Займ</string>
-    <string name="dest_new_loan">Новый займ</string>
-    <string name="dest_new_loan_result">Результат</string>
+    <string name="dest_sign_in">Sign in</string>
+    <string name="dest_sign_up">Sign up</string>
+    <string name="dest_guest">Authorization</string>
+    <string name="dest_loan_list">Loan History</string>
+    <string name="dest_loan_details">Loan</string>
+    <string name="dest_new_loan">New Loan</string>
+    <string name="dest_new_loan_result">Result</string>
 
-    <string name="first_name">Имя</string>
-    <string name="last_name">Фамилия</string>
-    <string name="phone_number">Номер телефона</string>
-    <string name="amount">Сумма</string>
-    <string name="period">Срок</string>
-    <string name="percent">Процент</string>
-    <string name="apply_for_loan">Оформить займ</string>
-    <string name="amount_is_zero">Сумма не должна быть равна нулю!</string>
-    <string name="max_amount">Максимальная сумма займа - %1d ₽</string>
-    <string name="amount_is_greater_than_max">Сумма превышает %1d ₽!</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="amount">Amount</string>
+    <string name="period">Period</string>
+    <string name="percent">Percent</string>
+    <string name="apply_for_loan">Apply for a loan</string>
+    <string name="amount_is_zero">Amount must not be zero!</string>
+    <string name="max_amount">Max loan amount - %1d $</string>
+    <string name="amount_is_greater_than_max">Amount extends %1d $!</string>
 
-    <string name="back_to_main">Вернуться на главную</string>
-    <string name="result_registered">Займ в количестве %1d ₽ под %.2f процентов, на срок %1d дней зарегистрирован</string>
-    <string name="receiver">Получатель: %1s %1s</string>
-    <string name="debtor_phone_number">Телефон: %1s</string>
-    <string name="debtor_phone_number_short">Тел: %1s</string>
+    <string name="back_to_main">Back to main</string>
+    <string name="result_registered">Loan for %1d $ at %.2f percent, for a period of %1d days registered</string>
+    <string name="receiver">Receiver: %1s %1s</string>
+    <string name="debtor_phone_number">Phone number: %1s</string>
+    <string name="debtor_phone_number_short">Phone: %1s</string>
 
     <string name="debtor_name">%1s %1s</string>
     <string name="loan_id">№ %1d</string>
-    <string name="loan_amount">Сумма: %1d ₽</string>
-    <string name="loan_percent">Процент: %.2f%%</string>
-    <string name="loan_period">Срок: %1d дней</string>
-    <string name="instruction_approved">Займ одобрен!\nПолучить его можно по адресу д. Пушкина</string>
-    <string name="instruction_registered">Займ зарегистрирован\nВскоре мы примем по нему решение</string>
-    <string name="instruction_rejected">В займе отказано\nУ Вас дрянная кредитная история
+    <string name="loan_amount">Amount: %1d $</string>
+    <string name="loan_percent">Percent: %.2f%%</string>
+    <string name="loan_period">Period: %1d days</string>
+    <string name="instruction_approved">Loan approved!\nYou can take money at 742 Evergreen Terrace</string>
+    <string name="instruction_registered">Loan registered\nSoon we will a decision regarding it</string>
+    <string name="instruction_rejected">Loan rejected\nYou have some crappy credit history
     </string>
 
-    <string name="app_name">Микрозаймы</string>
-    <string name="sign_up">Зарегистрироваться</string>
-    <string name="sign_in">Войти</string>
-    <string name="login">Логин</string>
-    <string name="password">Пароль</string>
-    <string name="log_out">Выйти</string>
-    <string name="no_loans">У вас нет займов\nЧтобы оформить новый займ - нажмите кнопку в правом нижнем углу</string>
-    <string name="empty_fields">Поля не должны быть пустыми!</string>
-    <string name="loan">Займ №%1d</string>
-    <string name="new_loan">Новый займ</string>
-    <string name="wrong_login_or_password">Неверный логин или пароль</string>
+    <string name="app_name">Microloans</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="log_out">Sign out</string>
+    <string name="no_loans">You have no loans\nTo arrange a loan click button in lower right corner</string>
+    <string name="empty_fields">Fields should not be empty!</string>
+    <string name="loan">Loan №%1d</string>
+    <string name="new_loan">New loan</string>
+    <string name="language_change">Pick a language</string>
+
 
 
 </resources>

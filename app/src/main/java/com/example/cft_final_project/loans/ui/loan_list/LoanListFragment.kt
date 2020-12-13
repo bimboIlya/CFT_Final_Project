@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cft_final_project.R
 import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.common.presentation.SnackbarManager
+import com.example.cft_final_project.common.presentation.showTranslatePopUpMenu
 import com.example.cft_final_project.common.util.EventObserver
 import com.example.cft_final_project.common.util.delegates.autoCleared
 import com.example.cft_final_project.common.util.delegates.snackbarManager
@@ -99,10 +100,14 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_log_out -> {
+            R.id.menu_log_out -> {
                 authManager.invalidateToken()
                 loanViewModel.clearCachedLoans()
                 navigateToGuestFragment()
+                true
+            }
+            R.id.menu_translate -> {
+                showTranslatePopUpMenu()
                 true
             }
             else -> return super.onOptionsItemSelected(item)

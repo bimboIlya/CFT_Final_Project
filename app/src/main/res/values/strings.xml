@@ -9,6 +9,7 @@
     <string name="exception_timeout">Истекло время соединения</string>
     <string name="exception_not_found">Не найдено</string>
     <string name="exception_no_connection">Нет соединения с интернетом</string>
+    <string name="wrong_login_or_password">Неверный логин или пароль</string>
 
     <string name="loan_approved">Одобрено</string>
     <string name="loan_registered">Зарегистрировано</string>
@@ -44,10 +45,9 @@
     <string name="loan_amount">Сумма: %1d ₽</string>
     <string name="loan_percent">Процент: %.2f%%</string>
     <string name="loan_period">Срок: %1d дней</string>
-    <string name="instruction_approved">Займ одобрен!\nПолучить его можно по адресу д. Пушкина</string>
+    <string name="instruction_approved">Займ одобрен!\nПолучить его можно по адресу ул. Пушкина д. Колотушкина</string>
     <string name="instruction_registered">Займ зарегистрирован\nВскоре мы примем по нему решение</string>
-    <string name="instruction_rejected">В займе отказано\nУ Вас дрянная кредитная история
-    </string>
+    <string name="instruction_rejected">В займе отказано\nУ Вас дрянная кредитная история</string>
 
     <string name="app_name">Микрозаймы</string>
     <string name="sign_up">Зарегистрироваться</string>
@@ -59,7 +59,7 @@
     <string name="empty_fields">Поля не должны быть пустыми!</string>
     <string name="loan">Займ №%1d</string>
     <string name="new_loan">Новый займ</string>
-    <string name="wrong_login_or_password">Неверный логин или пароль</string>
+    <string name="language_change">Выбор языка</string>
 
 
 </resources>
