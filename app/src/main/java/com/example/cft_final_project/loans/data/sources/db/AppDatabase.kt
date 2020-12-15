@@ -1,4 +1,4 @@
-package com.example.cft_final_project.loans.data.db
+package com.example.cft_final_project.loans.data.sources.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

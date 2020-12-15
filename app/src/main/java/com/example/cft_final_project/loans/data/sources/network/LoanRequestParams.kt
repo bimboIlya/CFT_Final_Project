@@ -1,4 +1,4 @@
-package com.example.cft_final_project.loans.data.network
+package com.example.cft_final_project.loans.data.sources.network
 
 
 import com.google.gson.annotations.SerializedName

@@ -1,4 +1,4 @@
-package com.example.cft_final_project.authentication.data.network
+package com.example.cft_final_project.authentication.data.sources.network
 
 import com.example.cft_final_project.authentication.data.model.UserApiModel
 import okhttp3.ResponseBody

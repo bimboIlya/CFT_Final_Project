@@ -7,12 +7,12 @@ import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
-import com.example.cft_final_project.loans.data.domain.CreateLoanUseCase
-import com.example.cft_final_project.loans.data.domain.GetLoanConditionsUseCase
+import com.example.cft_final_project.loans.data.mappers.LoanToLoanUiMapper
 import com.example.cft_final_project.loans.data.model.LoanConditions
-import com.example.cft_final_project.loans.data.model.LoanToLoanUiMapper
 import com.example.cft_final_project.loans.data.model.LoanUi
-import com.example.cft_final_project.loans.data.network.LoanRequestParams
+import com.example.cft_final_project.loans.data.sources.network.LoanRequestParams
+import com.example.cft_final_project.loans.domain.CreateLoanUseCase
+import com.example.cft_final_project.loans.domain.GetLoanConditionsUseCase
 import kotlinx.coroutines.launch
 
 class NewLoanViewModel(

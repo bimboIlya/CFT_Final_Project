@@ -1,4 +1,4 @@
-package com.example.cft_final_project.loans.data.network
+package com.example.cft_final_project.loans.data.sources.network
 
 import com.example.cft_final_project.loans.data.model.LoanApiModel
 import com.example.cft_final_project.loans.data.model.LoanConditionsApiModel

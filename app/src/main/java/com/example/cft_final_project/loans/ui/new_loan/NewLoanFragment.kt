@@ -18,7 +18,7 @@ import com.example.cft_final_project.common.util.extensions.onActionDoneHideKeyb
 import com.example.cft_final_project.common.util.extensions.textChanges
 import com.example.cft_final_project.databinding.FragmentNewLoanBinding
 import com.example.cft_final_project.loans.data.model.LoanUi
-import com.example.cft_final_project.loans.data.network.LoanRequestParams
+import com.example.cft_final_project.loans.data.sources.network.LoanRequestParams
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,17 +55,20 @@ class NewLoanFragment : Fragment(R.layout.fragment_new_loan) {
             }
         }
 
-        observeUi()
         observeNavEvents()
         observeErrorEvents()
-
-        disableButtonUntilValidInput()
     }
 
     private fun applyNumberMaskToPhoneInput(phoneInput: EditText) {
         val slots = UnderscoreDigitSlotsParser().parseSlots("_ (___) ___-__-__")
         val phoneMask = MaskImpl.createTerminated(slots)
         MaskFormatWatcher(phoneMask).installOn(phoneInput)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        observeUi()
+        disableButtonUntilValidInput()
     }
 
     private fun disableButtonUntilValidInput() {

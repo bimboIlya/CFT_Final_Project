@@ -1,10 +1,10 @@
 package com.example.cft_final_project.di
 
-import com.example.cft_final_project.authentication.data.domain.AttemptLoginUseCase
-import com.example.cft_final_project.authentication.data.domain.AttemptRegistrationUseCase
-import com.example.cft_final_project.authentication.data.domain.UserRepository
-import com.example.cft_final_project.authentication.data.domain.UserRepositoryImpl
-import com.example.cft_final_project.authentication.data.network.AuthApiService
+import com.example.cft_final_project.authentication.data.sources.UserRepository
+import com.example.cft_final_project.authentication.data.sources.UserRepositoryImpl
+import com.example.cft_final_project.authentication.data.sources.network.AuthApiService
+import com.example.cft_final_project.authentication.domain.AttemptLoginUseCase
+import com.example.cft_final_project.authentication.domain.AttemptRegistrationUseCase
 import com.example.cft_final_project.authentication.ui.AuthViewModel
 import com.example.cft_final_project.common.network.NetworkService
 import org.koin.androidx.viewmodel.dsl.viewModel

@@ -1,14 +1,14 @@
-package com.example.cft_final_project.loans.data.domain
+package com.example.cft_final_project.loans.data.sources
 
 import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.util.mapListOrEmpty
-import com.example.cft_final_project.loans.data.db.LoanDao
-import com.example.cft_final_project.loans.data.model.ConditionsApiToConditionsMapper
+import com.example.cft_final_project.loans.data.mappers.ConditionsApiToConditionsMapper
+import com.example.cft_final_project.loans.data.mappers.LoanApiToLoanMapper
 import com.example.cft_final_project.loans.data.model.Loan
-import com.example.cft_final_project.loans.data.model.LoanApiToLoanMapper
 import com.example.cft_final_project.loans.data.model.LoanConditions
-import com.example.cft_final_project.loans.data.network.LoanApiService
-import com.example.cft_final_project.loans.data.network.LoanRequestParams
+import com.example.cft_final_project.loans.data.sources.db.LoanDao
+import com.example.cft_final_project.loans.data.sources.network.LoanApiService
+import com.example.cft_final_project.loans.data.sources.network.LoanRequestParams
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

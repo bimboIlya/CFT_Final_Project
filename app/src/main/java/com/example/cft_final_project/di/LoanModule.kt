@@ -1,9 +1,14 @@
 package com.example.cft_final_project.di
 
 import com.example.cft_final_project.common.network.NetworkService
-import com.example.cft_final_project.loans.data.db.AppDatabase
-import com.example.cft_final_project.loans.data.domain.*
-import com.example.cft_final_project.loans.data.network.LoanApiService
+import com.example.cft_final_project.loans.data.sources.LoanRepository
+import com.example.cft_final_project.loans.data.sources.LoanRepositoryImpl
+import com.example.cft_final_project.loans.data.sources.db.AppDatabase
+import com.example.cft_final_project.loans.data.sources.network.LoanApiService
+import com.example.cft_final_project.loans.domain.ClearCachedLoansUseCase
+import com.example.cft_final_project.loans.domain.CreateLoanUseCase
+import com.example.cft_final_project.loans.domain.GetAllLoansUseCase
+import com.example.cft_final_project.loans.domain.GetLoanConditionsUseCase
 import com.example.cft_final_project.loans.ui.loan_details.LoanDetailsViewModel
 import com.example.cft_final_project.loans.ui.loan_list.LoanListViewModel
 import com.example.cft_final_project.loans.ui.new_loan.NewLoanResultViewModel

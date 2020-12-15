@@ -7,7 +7,7 @@ import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.common.AuthManagerImpl
 import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.exceptions.error_parser.ErrorParserImpl
-import com.example.cft_final_project.loans.data.db.AppDatabase
+import com.example.cft_final_project.loans.data.sources.db.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 

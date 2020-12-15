@@ -1,7 +1,7 @@
-package com.example.cft_final_project.authentication.data.domain
+package com.example.cft_final_project.authentication.data.sources
 
 import com.example.cft_final_project.authentication.data.model.User
-import com.example.cft_final_project.authentication.data.network.AuthParams
+import com.example.cft_final_project.authentication.data.sources.network.AuthParams
 import com.example.cft_final_project.common.network.Result
 
 interface UserRepository {

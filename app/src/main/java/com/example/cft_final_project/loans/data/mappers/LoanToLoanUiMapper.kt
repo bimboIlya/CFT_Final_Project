@@ -1,6 +1,9 @@
-package com.example.cft_final_project.loans.data.model
+package com.example.cft_final_project.loans.data.mappers
 
 import com.example.cft_final_project.common.util.Mapper
+import com.example.cft_final_project.loans.data.model.Loan
+import com.example.cft_final_project.loans.data.model.LoanStatus
+import com.example.cft_final_project.loans.data.model.LoanUi
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -87,9 +87,9 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@animator/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_loanListFragment_to_guestUserFragment"
-            app:destination="@id/guestUserFragment"
-            app:popUpTo="@id/guestUserFragment"
+            android:id="@+id/action_loanListFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

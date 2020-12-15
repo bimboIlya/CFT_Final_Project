@@ -3,9 +3,9 @@ package com.example.cft_final_project.authentication.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cft_final_project.authentication.data.domain.AttemptLoginUseCase
-import com.example.cft_final_project.authentication.data.domain.AttemptRegistrationUseCase
-import com.example.cft_final_project.authentication.data.network.AuthParams
+import com.example.cft_final_project.authentication.data.sources.network.AuthParams
+import com.example.cft_final_project.authentication.domain.AttemptLoginUseCase
+import com.example.cft_final_project.authentication.domain.AttemptRegistrationUseCase
 import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.network.Result.Error

@@ -91,7 +91,7 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
     }
 
     private fun navigateToGuestFragment() {
-        findNavController().navigate(R.id.action_loanListFragment_to_guestUserFragment)
+        findNavController().navigate(R.id.action_loanListFragment_to_homeFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
