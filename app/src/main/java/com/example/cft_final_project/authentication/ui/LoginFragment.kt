@@ -37,7 +37,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 val password = loginPasswordInput.text.toString()
 
                 if (name.isNotBlank() && password.isNotBlank()) {
-                    requireView().hideKeyboard()
+                    hideKeyboard()
                     val credentials = AuthParams(name, password)
                     authViewModel.attemptLogin(credentials)
                 } else {

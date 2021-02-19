@@ -1,7 +1,6 @@
 package com.example.cft_final_project
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -19,7 +18,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.nav_host)
+        navController = findNavController(R.id.nav_host).apply {
+            addOnDestinationChangedListener { _, _, _ ->
+                hideKeyboard()
+            }
+        }
         setUpToolbar()
     }
 
@@ -32,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        findViewById<View>(R.id.nav_host).hideKeyboard()
         return navController.navigateUp(appBarConfiguration) ||
                 super.onSupportNavigateUp()
     }

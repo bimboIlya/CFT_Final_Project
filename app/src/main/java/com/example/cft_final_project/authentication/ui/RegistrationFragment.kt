@@ -37,7 +37,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 val password = passwordInput.text.toString()
 
                 if (name.isNotBlank() && password.isNotBlank()) {
-                    requireView().hideKeyboard()
+                    hideKeyboard()
                     val credentials = AuthParams(name, password)
                     authViewModel.attemptRegistration(credentials)
                 } else {
