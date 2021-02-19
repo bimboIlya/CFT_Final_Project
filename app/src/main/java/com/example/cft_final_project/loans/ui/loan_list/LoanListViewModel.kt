@@ -3,8 +3,6 @@ package com.example.cft_final_project.loans.ui.loan_list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
-import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
 import com.example.cft_final_project.common.util.mapListOrEmpty
@@ -17,8 +15,7 @@ import kotlinx.coroutines.launch
 class LoanListViewModel(
     private val getAllLoansUseCase: GetAllLoansUseCase,
     private val clearCachedLoansUseCase: ClearCachedLoansUseCase,
-    errorParser: ErrorParser
-) : BaseViewModel(errorParser) {
+) : BaseViewModel() {
 
     private val _loanListLiveData = MutableLiveData<List<LoanUi>>()
     val loanListLiveData: LiveData<List<LoanUi>> get() = _loanListLiveData
@@ -32,20 +29,12 @@ class LoanListViewModel(
 
     private fun loadLoanList() {
         viewModelScope.launch {
-            loadingStarted()
-
-            when (val result = getAllLoansUseCase(Unit)) {
-                is Result.Success -> {
-                    _loanListLiveData.value =
-                        LoanToLoanUiMapper.mapListOrEmpty(result.data)
-                }
-                is Result.Error -> {
-                    loadingStopped()
-                    emitErrorEvent(result.exception)
-                }
+            withIndicator {
+                getAllLoansUseCase(Unit).handle(
+                    onSuccess = { _loanListLiveData.value = LoanToLoanUiMapper.mapListOrEmpty(it) },
+                    onFailure = { emitErrorEvent(it) }
+                )
             }
-
-            loadingStopped()
         }
     }
 

@@ -3,8 +3,6 @@ package com.example.cft_final_project.loans.ui.new_loan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
-import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
 import com.example.cft_final_project.loans.data.mappers.LoanToLoanUiMapper
@@ -18,8 +16,7 @@ import kotlinx.coroutines.launch
 class NewLoanViewModel(
     private val getLoanConditionsUseCase: GetLoanConditionsUseCase,
     private val createLoanUseCase: CreateLoanUseCase,
-    errorParser: ErrorParser
-) : BaseViewModel(errorParser) {
+) : BaseViewModel() {
 
     private val _loanConditionsLiveData: MutableLiveData<LoanConditions> = MutableLiveData()
     val loanConditionsLiveData: LiveData<LoanConditions> get() = _loanConditionsLiveData
@@ -33,30 +30,26 @@ class NewLoanViewModel(
 
     private fun loadLoanConditions() {
         viewModelScope.launch {
-            loadingStarted()
-
-            when (val result = getLoanConditionsUseCase(Unit)) {
-                is Result.Success -> _loanConditionsLiveData.value = result.data
-                is Result.Error -> emitErrorEvent(result.exception)
+            withIndicator {
+                getLoanConditionsUseCase(Unit).handle(
+                    onSuccess = { _loanConditionsLiveData.value = it },
+                    onFailure = { emitErrorEvent(it) }
+                )
             }
-
-            loadingStopped()
         }
     }
 
     fun attemptToCreateLoan(loanParams: LoanRequestParams) {
         viewModelScope.launch {
-            loadingStarted()
-
-            when (val result = createLoanUseCase(loanParams)) {
-                is Result.Success -> {
-                    val loanUi = LoanToLoanUiMapper.map(result.data)
-                    navigateToLoanRequestResult(loanUi)
-                }
-                is Result.Error -> emitErrorEvent(result.exception)
+            withIndicator {
+                createLoanUseCase(loanParams).handle(
+                    onSuccess = {
+                        val loanUi = LoanToLoanUiMapper.map(it)
+                        navigateToLoanRequestResult(loanUi)
+                    },
+                    onFailure = { emitErrorEvent(it) }
+                )
             }
-
-            loadingStopped()
         }
     }
 

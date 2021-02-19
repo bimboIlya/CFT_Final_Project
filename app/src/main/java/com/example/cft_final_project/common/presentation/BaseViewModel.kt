@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.exceptions.error_parser.ParsedError
 import com.example.cft_final_project.common.util.Event
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-abstract class BaseViewModel(
-    private val errorParser: ErrorParser
-) : ViewModel() {
+abstract class BaseViewModel : ViewModel(), KoinComponent {
+
+    private val errorParser: ErrorParser by inject()
 
     private val _isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val isLoadingLiveData: LiveData<Boolean> get() = _isLoadingLiveData
@@ -28,5 +30,11 @@ abstract class BaseViewModel(
 
     protected fun loadingStopped() {
         _isLoadingLiveData.value = false
+    }
+
+    protected suspend fun withIndicator(block: suspend () -> Unit) {
+        loadingStarted()
+        block()
+        loadingStopped()
     }
 }
