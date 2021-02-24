@@ -5,7 +5,6 @@ import com.example.cft_final_project.common.network.NetworkService
 import com.example.cft_final_project.common.network.NetworkServiceImpl
 import com.example.cft_final_project.common.network.TokenNetworkServiceImpl
 import okhttp3.OkHttpClient
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,11 +14,11 @@ val networkModule = module {
     single { provideBaseHttpClient() }
     single { provideBaseRetrofit() }
 
-    single<NetworkService>(named(BASE_NETWORK_SERVICE)) {
+    single<NetworkService>(BASE_NETWORK_SERVICE) {
         NetworkServiceImpl(get(), get())
     }
 
-    single<NetworkService>(named(TOKEN_NETWORK_SERVICE)) {
+    single<NetworkService>(TOKEN_NETWORK_SERVICE) {
         TokenNetworkServiceImpl(get(), get(), get())
     }
 }
@@ -37,3 +36,8 @@ private fun provideBaseRetrofit(): Retrofit {
         .baseUrl(BuildConfig.SERVER_URL)
         .build()
 }
+
+inline fun <reified S> provideNetworkService(
+    service: NetworkService
+): S = service.create(S::class.java)
+
