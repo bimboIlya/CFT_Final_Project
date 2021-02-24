@@ -1,6 +1,5 @@
 package com.example.cft_final_project.loans.data.sources
 
-import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.util.mapListOrEmpty
 import com.example.cft_final_project.loans.data.mappers.ConditionsApiToConditionsMapper
 import com.example.cft_final_project.loans.data.mappers.LoanApiToLoanMapper
@@ -9,69 +8,53 @@ import com.example.cft_final_project.loans.data.model.LoanConditions
 import com.example.cft_final_project.loans.data.sources.db.LoanDao
 import com.example.cft_final_project.loans.data.sources.network.LoanApiService
 import com.example.cft_final_project.loans.data.sources.network.LoanRequestParams
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 
 class LoanRepositoryImpl(
     private val loanApiService: LoanApiService,
     private val loanDao: LoanDao,
-    private val dispatcherIO: CoroutineDispatcher
 ) : LoanRepository {
 
-    override suspend fun createLoan(loanParams: LoanRequestParams): Result<Loan> =
-        withContext(dispatcherIO) {
-            return@withContext try {
-                val loanApi = loanApiService.createLoan(loanParams)
-                val loan = LoanApiToLoanMapper.map(loanApi)
+    override suspend fun createLoan(loanParams: LoanRequestParams): Loan {
+        val loanApi = loanApiService.createLoan(loanParams)
+        val loan = LoanApiToLoanMapper.map(loanApi)
 
-                Result.Success(loan)
-            } catch (ex: Throwable) {
-                Result.Error(ex)
-            }
-        }
-
-    override suspend fun getLoanById(id: Int): Result<Loan> = withContext(dispatcherIO) {
-        return@withContext try {
-            val loanApi = loanApiService.getLoanById(id)
-            val loan = LoanApiToLoanMapper.map(loanApi)
-
-            Result.Success(loan)
-        } catch (ex: Throwable) {
-            Result.Error(ex)
-        }
+        return loan
     }
 
-    override suspend fun getAllLoans(): Result<List<Loan>> = withContext(dispatcherIO) {
-        return@withContext try {
+    override suspend fun getLoanById(id: Int): Loan {
+        val loanApi = loanApiService.getLoanById(id)
+        val loan = LoanApiToLoanMapper.map(loanApi)
+
+        return loan
+    }
+
+    override suspend fun getAllLoans(): List<Loan> {
+        return try {
             val loanApiList = loanApiService.getAllLoans()
             val loanList = LoanApiToLoanMapper.mapListOrEmpty(loanApiList)
 
             loanDao.insertAll(loanList)
 
-            Result.Success(loanList)
+            loanList
         } catch (ex: Throwable) {
             val cachedLoanList = loanDao.getAllLoans()
 
             when (cachedLoanList.isEmpty()) {
-                false -> Result.Success(cachedLoanList)
-                true -> Result.Error(ex)
+                false -> cachedLoanList
+                true -> throw ex
             }
         }
     }
 
-    override suspend fun getLoanConditions(): Result<LoanConditions> = withContext(dispatcherIO) {
-        return@withContext try {
-            val loanConditionsApi = loanApiService.getLoanConditions()
-            val loanConditions = ConditionsApiToConditionsMapper.map(loanConditionsApi)
+    override suspend fun getLoanConditions(): LoanConditions {
+        val loanConditionsApi = loanApiService.getLoanConditions()
+        val loanConditions = ConditionsApiToConditionsMapper.map(loanConditionsApi)
 
-            Result.Success(loanConditions)
-        } catch (ex: Throwable) {
-            Result.Error(ex)
-        }
+        return loanConditions
     }
 
-    override suspend fun clearCachedLoans() = withContext(dispatcherIO) {
+
+    override suspend fun clearCachedLoans() {
         loanDao.dropTable()
-        Result.Success(Unit)
     }
 }

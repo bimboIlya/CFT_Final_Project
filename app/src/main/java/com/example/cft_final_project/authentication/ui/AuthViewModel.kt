@@ -4,17 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.cft_final_project.authentication.data.sources.network.AuthParams
-import com.example.cft_final_project.authentication.domain.AttemptLoginUseCase
-import com.example.cft_final_project.authentication.domain.AttemptRegistrationUseCase
-import com.example.cft_final_project.common.AuthManager
+import com.example.cft_final_project.authentication.domain.LoginUseCase
+import com.example.cft_final_project.authentication.domain.RegistrationScenario
 import com.example.cft_final_project.common.presentation.BaseViewModel
 import com.example.cft_final_project.common.util.Event
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val attemptRegistrationUseCase: AttemptRegistrationUseCase,
-    private val attemptLoginUseCase: AttemptLoginUseCase,
-    private val authManager: AuthManager,
+    private val registrationScenario: RegistrationScenario,
+    private val loginUseCase: LoginUseCase,
 ) : BaseViewModel() {
 
     private val _toLoanListEvent = MutableLiveData<Event<Unit>>()
@@ -23,8 +21,8 @@ class AuthViewModel(
     fun attemptRegistration(credentials: AuthParams) {
         viewModelScope.launch {
             withIndicator {
-                attemptRegistrationUseCase(credentials).handle(
-                    onSuccess = { attemptLogin(credentials) },
+                registrationScenario(credentials).handle(
+                    onSuccess = { navigateToLoanList() },
                     onFailure = { emitErrorEvent(it) }
                 )
             }
@@ -34,14 +32,15 @@ class AuthViewModel(
     fun attemptLogin(credentials: AuthParams) {
         viewModelScope.launch {
             withIndicator {
-                attemptLoginUseCase(credentials).handle(
-                    onSuccess = {
-                        authManager.setToken(it)
-                        _toLoanListEvent.value = Event(Unit)
-                    },
+                loginUseCase(credentials).handle(
+                    onSuccess = { navigateToLoanList() },
                     onFailure = { emitErrorEvent(it) }
                 )
             }
         }
+    }
+
+    private fun navigateToLoanList() {
+        _toLoanListEvent.value = Event(Unit)
     }
 }

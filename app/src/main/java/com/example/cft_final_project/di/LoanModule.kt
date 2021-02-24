@@ -20,16 +20,16 @@ import org.koin.dsl.module
 val loanModule = module {
     single { provideLoanApiService(get(named(TOKEN_NETWORK_SERVICE))) }
     single { provideLoanDao(get()) }
-    single<LoanRepository> { LoanRepositoryImpl(get(), get(), get()) }
+    single<LoanRepository> { LoanRepositoryImpl(get(), get()) }
 
-    factory { ClearCachedLoansUseCase(get()) }
-    factory { CreateLoanUseCase(get()) }
-    factory { GetAllLoansUseCase(get()) }
-    factory { GetLoanConditionsUseCase(get()) }
+    factory { ClearCachedLoansUseCase(get(), get()) }
+    factory { CreateLoanUseCase(get(), get()) }
+    factory { GetAllLoansUseCase(get(), get()) }
+    factory { GetLoanConditionsUseCase(get(), get()) }
 
-    viewModel { LoanListViewModel(get(), get(), get()) }
+    viewModel { LoanListViewModel(get(), get()) }
     viewModel { LoanDetailsViewModel(get()) }
-    viewModel { NewLoanViewModel(get(), get(), get()) }
+    viewModel { NewLoanViewModel(get(), get()) }
     viewModel { NewLoanResultViewModel(get()) }
 }
 

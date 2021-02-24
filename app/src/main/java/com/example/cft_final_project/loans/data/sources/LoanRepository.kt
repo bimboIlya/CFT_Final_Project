@@ -1,19 +1,18 @@
 package com.example.cft_final_project.loans.data.sources
 
-import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.loans.data.model.Loan
 import com.example.cft_final_project.loans.data.model.LoanConditions
 import com.example.cft_final_project.loans.data.sources.network.LoanRequestParams
 
 interface LoanRepository {
 
-    suspend fun createLoan(loanParams: LoanRequestParams): Result<Loan>
+    suspend fun createLoan(loanParams: LoanRequestParams): Loan
 
-    suspend fun getLoanById(id: Int): Result<Loan>
+    suspend fun getLoanById(id: Int): Loan
 
-    suspend fun getAllLoans(): Result<List<Loan>>
+    suspend fun getAllLoans(): List<Loan>
 
-    suspend fun getLoanConditions(): Result<LoanConditions>
+    suspend fun getLoanConditions(): LoanConditions
 
-    suspend fun clearCachedLoans(): Result<Unit>
+    suspend fun clearCachedLoans()
 }
