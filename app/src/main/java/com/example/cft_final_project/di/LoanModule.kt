@@ -20,7 +20,7 @@ val loanModule = module {
     single { provideLoanDao(get()) }
     single<LoanRepository> { LoanRepositoryImpl(get(), get()) }
 
-    factory { ClearCachedLoansUseCase(get(), get()) }
+    factory { ClearCachedLoansUseCase(get(), get(), get()) }
     factory { CreateLoanUseCase(get(), get()) }
     factory { GetAllLoansUseCase(get(), get()) }
     factory { GetLoanConditionsUseCase(get(), get()) }

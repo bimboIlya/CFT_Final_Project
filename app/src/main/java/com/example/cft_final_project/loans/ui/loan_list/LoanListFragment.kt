@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.cft_final_project.R
-import com.example.cft_final_project.common.AuthManager
 import com.example.cft_final_project.common.presentation.SnackbarManager
 import com.example.cft_final_project.common.presentation.showTranslatePopUpMenu
 import com.example.cft_final_project.common.util.EventObserver
@@ -18,15 +17,11 @@ import com.example.cft_final_project.common.util.delegates.autoCleared
 import com.example.cft_final_project.common.util.delegates.snackbarManager
 import com.example.cft_final_project.databinding.FragmentLoanListBinding
 import com.example.cft_final_project.loans.data.model.LoanUi
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
 
     private val loanViewModel: LoanListViewModel by viewModel()
-
-    private val authManager: AuthManager by inject()
 
     private var binding: FragmentLoanListBinding by autoCleared()
     private var adapter: LoanAdapter by autoCleared()
@@ -79,6 +74,10 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
         loanViewModel.toLoanDetailEvent.observe(viewLifecycleOwner, EventObserver {
             navigateToOrderDetails(it)
         })
+
+        loanViewModel.toGuestScreenEvent.observe(viewLifecycleOwner, EventObserver {
+            navigateToGuestFragment()
+        })
     }
 
     private fun navigateToOrderDetails(loan: LoanUi) {
@@ -101,9 +100,7 @@ class LoanListFragment : Fragment(R.layout.fragment_loan_list) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_log_out -> {
-                authManager.invalidateToken()
                 loanViewModel.clearCachedLoans()
-                navigateToGuestFragment()
                 true
             }
             R.id.menu_translate -> {

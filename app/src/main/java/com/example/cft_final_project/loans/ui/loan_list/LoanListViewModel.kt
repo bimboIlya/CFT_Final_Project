@@ -23,6 +23,9 @@ class LoanListViewModel(
     private val _toLoanDetailsEvent = MutableLiveData<Event<LoanUi>>()
     val toLoanDetailEvent: LiveData<Event<LoanUi>> get() = _toLoanDetailsEvent
 
+    private val _toGuestScreenEvent = MutableLiveData<Event<Unit>>()
+    val toGuestScreenEvent: LiveData<Event<Unit>> get() = _toGuestScreenEvent
+
     init {
         loadLoanList()
     }
@@ -40,8 +43,15 @@ class LoanListViewModel(
 
     fun clearCachedLoans() {
         viewModelScope.launch {
-            clearCachedLoansUseCase(Unit)
+            clearCachedLoansUseCase(Unit).handle(
+                onSuccess = { navigateToGuestScreen() },
+                onFailure = { emitErrorEvent(it) }
+            )
         }
+    }
+
+    fun navigateToGuestScreen() {
+        _toGuestScreenEvent.value = Event(Unit)
     }
 
     fun navigateToLoanDetails(loan: LoanUi) {
