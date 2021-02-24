@@ -3,8 +3,8 @@ package com.example.cft_final_project.common.network
 sealed class Result<out R> {
 
     fun handle(
-        onSuccess: (R) -> Unit = { },
-        onFailure: (ex: Throwable) -> Unit = { }
+        onFailure: (ex: Throwable) -> Unit = { },
+        onSuccess: (R) -> Unit = { }
     ) {
         when (this) {
             is Success -> onSuccess(this.data)

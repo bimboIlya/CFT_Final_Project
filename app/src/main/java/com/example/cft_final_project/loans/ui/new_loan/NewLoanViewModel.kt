@@ -31,10 +31,9 @@ class NewLoanViewModel(
     private fun loadLoanConditions() {
         viewModelScope.launch {
             withIndicator {
-                getLoanConditionsUseCase(Unit).handle(
-                    onSuccess = { _loanConditionsLiveData.value = it },
-                    onFailure = { emitErrorEvent(it) }
-                )
+                getLoanConditionsUseCase(Unit).handleVm {
+                    _loanConditionsLiveData.value = it
+                }
             }
         }
     }
@@ -42,13 +41,10 @@ class NewLoanViewModel(
     fun attemptToCreateLoan(loanParams: LoanRequestParams) {
         viewModelScope.launch {
             withIndicator {
-                createLoanUseCase(loanParams).handle(
-                    onSuccess = {
-                        val loanUi = LoanToLoanUiMapper.map(it)
-                        navigateToLoanRequestResult(loanUi)
-                    },
-                    onFailure = { emitErrorEvent(it) }
-                )
+                createLoanUseCase(loanParams).handleVm {
+                    val loanUi = LoanToLoanUiMapper.map(it)
+                    navigateToLoanRequestResult(loanUi)
+                }
             }
         }
     }

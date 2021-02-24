@@ -21,10 +21,9 @@ class AuthViewModel(
     fun attemptRegistration(credentials: AuthParams) {
         viewModelScope.launch {
             withIndicator {
-                registrationScenario(credentials).handle(
-                    onSuccess = { navigateToLoanList() },
-                    onFailure = { emitErrorEvent(it) }
-                )
+                registrationScenario(credentials).handleVm {
+                    navigateToLoanList()
+                }
             }
         }
     }
@@ -32,10 +31,9 @@ class AuthViewModel(
     fun attemptLogin(credentials: AuthParams) {
         viewModelScope.launch {
             withIndicator {
-                loginUseCase(credentials).handle(
-                    onSuccess = { navigateToLoanList() },
-                    onFailure = { emitErrorEvent(it) }
-                )
+                loginUseCase(credentials).handleVm {
+                    navigateToLoanList()
+                }
             }
         }
     }

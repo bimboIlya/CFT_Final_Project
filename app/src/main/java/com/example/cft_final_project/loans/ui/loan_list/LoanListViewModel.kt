@@ -33,20 +33,19 @@ class LoanListViewModel(
     private fun loadLoanList() {
         viewModelScope.launch {
             withIndicator {
-                getAllLoansUseCase(Unit).handle(
-                    onSuccess = { _loanListLiveData.value = LoanToLoanUiMapper.mapListOrEmpty(it) },
-                    onFailure = { emitErrorEvent(it) }
-                )
+                getAllLoansUseCase(Unit).handleVm {
+                    _loanListLiveData.value = LoanToLoanUiMapper.mapListOrEmpty(it)
+                }
+
             }
         }
     }
 
     fun clearCachedLoans() {
         viewModelScope.launch {
-            clearCachedLoansUseCase(Unit).handle(
-                onSuccess = { navigateToGuestScreen() },
-                onFailure = { emitErrorEvent(it) }
-            )
+            clearCachedLoansUseCase(Unit).handleVm {
+                navigateToGuestScreen()
+            }
         }
     }
 

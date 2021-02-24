@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cft_final_project.common.exceptions.error_parser.ErrorParser
 import com.example.cft_final_project.common.exceptions.error_parser.ParsedError
+import com.example.cft_final_project.common.network.Result
 import com.example.cft_final_project.common.util.Event
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -36,5 +37,12 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
         loadingStarted()
         block()
         loadingStopped()
+    }
+
+    protected fun <R> Result<R>.handleVm(
+        onFailure: (ex: Throwable) -> Unit = { emitErrorEvent(it) },
+        onSuccess: (data: R) -> Unit = { }
+    ) {
+        handle(onFailure, onSuccess)
     }
 }
